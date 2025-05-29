@@ -1,0 +1,116 @@
+name: Bottles
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - 'Formula/**/*.rb'
+
+env:
+  HOMEBREW_DEVELOPER: 1
+  HOMEBREW_GITHUB_ACTIONS: 1
+  HOMEBREW_NO_AUTO_UPDATE: 1
+  HOMEBREW_NO_INSTALL_FROM_API: 1
+  HOMEBREW_NO_ANALYTICS: 1
+  HOMEBREW_GITHUB_PACKAGES_URL: "https://ghcr.io/v2/commitmaniac/tap"
+
+jobs:
+  build:
+    name: Build
+    strategy:
+      matrix:
+        runner:
+          - macos-13
+          - macos-14
+          - macos-15
+          - ubuntu-24.04
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - name: Setup Homebrew
+        id: homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Cache Homebrew bundler RubyGems
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.homebrew.outputs.gems-path }}
+          key: ${{ matrix.runner }}-rubygems-${{ steps.homebrew.outputs.gems-hash }}
+          restore-keys: |
+            ${{ matrix.runner }}-rubygems-
+
+      - name: Check only-cleanup-before
+        run: brew test-bot --only-cleanup-before
+
+      - name: Check tap setup
+        run: brew test-bot --only-setup
+
+      - name: Check tap syntax
+        run: brew test-bot --only-tap-syntax
+
+      - name: Build bottles
+        run: |
+          brew test-bot --only-formulae --only-json-tab --root-url="$HOMEBREW_GITHUB_PACKAGES_URL"
+
+      - name: Upload bottle artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: bottles_${{ matrix.runner }}
+          path: "*.bottle.*"
+
+  publish:
+    name: Publish
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      actions: read
+      contents: write
+      packages: write
+      pull-requests: write
+      attestations: write
+      id-token: write
+    env:
+      PULL_REQUEST: ${{ github.event.pull_request.number }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Setup Homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Configure Git user
+        uses: Homebrew/actions/git-user-config@master
+
+      - name: Checkout pull request branch
+        run: |
+          gh pr checkout "$PULL_REQUEST" --repo "$GITHUB_REPOSITORY"
+
+      - name: Download bottle artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: bottles_*
+          path: "${{ github.workspace }}/bottles"
+          merge-multiple: true
+
+      - name: Generate build provenance
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: "${{ github.workspace }}/bottles/*.tar.gz"
+
+      - name: Upload bottles to GitHub Packages
+        env:
+          HOMEBREW_GITHUB_PACKAGES_USER: ${{ github.repository_owner }}
+          HOMEBREW_GITHUB_PACKAGES_TOKEN: ${{ github.token }}
+        working-directory: "${{ github.workspace }}/bottles"
+        run: |
+          brew pr-upload --debug --keep-old --root-url="$HOMEBREW_GITHUB_PACKAGES_URL"
+
+      - name: Push commits
+        uses: Homebrew/actions/git-try-push@master
+        with:
+          token: ${{ github.token }}
+          branch: ${{ github.event.pull_request.head.ref }}
+          remote: ${{ github.event.pull_request.head.repo.clone_url }}
+          remote_branch: ${{ github.event.pull_request.head.ref }}
+
+      - name: Mark pull request as ready
+        run: |
+          gh pr edit --add-label "ci-published-bottles" "$PULL_REQUEST" --repo "$GITHUB_REPOSITORY"
