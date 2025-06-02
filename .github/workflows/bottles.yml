@@ -101,7 +101,7 @@ jobs:
           HOMEBREW_GITHUB_PACKAGES_TOKEN: ${{ github.token }}
         working-directory: "${{ github.workspace }}/bottles"
         run: |
-          brew pr-upload --debug --keep-old --root-url="$HOMEBREW_GITHUB_PACKAGES_URL"
+          brew pr-upload --debug --root-url="$HOMEBREW_GITHUB_PACKAGES_URL"
 
       - name: Push commits
         uses: Homebrew/actions/git-try-push@master
