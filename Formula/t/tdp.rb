@@ -1,8 +1,8 @@
 class Tdp < Formula
   desc "Parse your downloaded TikTok data"
   homepage "https://github.com/commitmaniac/tdp"
-  url "https://github.com/commitmaniac/tdp/archive/refs/tags/1.0.1.tar.gz"
-  sha256 "03d129dac52b5c9b96467241b0f85d9b209ba130e0b5d74687e4af7893fb86ce"
+  url "https://github.com/commitmaniac/tdp/archive/refs/tags/1.0.2.tar.gz"
+  sha256 "4d84a8ed149504fdaf2dffd4c84c40b76980700094ba07ca88b95f17f4d47ee4"
   license "BSD-3-Clause"
   head "https://github.com/commitmaniac/tdp.git", branch: "master"
 
