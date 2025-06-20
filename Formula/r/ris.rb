@@ -1,8 +1,8 @@
 class Ris < Formula
   desc "Rename in sequence"
   homepage "https://github.com/commitmaniac/ris"
-  url "https://github.com/commitmaniac/ris/archive/refs/tags/1.1.0.tar.gz"
-  sha256 "a8ee68e7f9eecfefb1c10ca539677b81345311b9cb38fe41a439879228db55e5"
+  url "https://github.com/commitmaniac/ris/archive/refs/tags/1.2.0.tar.gz"
+  sha256 "1e7a2497f51f141d8d1c044949ffd048fdb766e2fd2279ea5ef37f422ae835d2"
   license "BSD-3-Clause"
   head "https://github.com/commitmaniac/ris.git", branch: "master"
 
