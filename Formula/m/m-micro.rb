@@ -10,10 +10,10 @@ class MMicro < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/commitmaniac/tap"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "1b24ae7e8e058513d248dff33d92205611c6de9b8c01358f5918644cb1c3d175"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "8e9ce388d95e86b2b73588029fe9a9701ebe1e5125253ebc9a4c2ad745a72e14"
-    sha256 cellar: :any_skip_relocation, ventura:       "3daefab46d595781e6fcda5797916f0e6070dea8b3773a89b52ee360395e9902"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b63d8eeba1ee0d69eccb45b5e651324185f08b4dc80e4edf50c5b530e38902b1"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "49ca9a34b7d5c6029ecc7f3e37bdbbab278df209809509fba793fa425ee78fcf"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "a0948107c6d679f3d44c9ff90b066cfce8fa0d412f4dfdc36974cb156d76d488"
+    sha256 cellar: :any_skip_relocation, ventura:       "0a7a57a8c9d04aa1b39e803d27cc898acb31cbe0096aac8f751fe24d8bf7a8ee"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "f62b7bc092195fdcd093d195885c633cfb3ba40215940555926700dc5879c6c8"
   end
 
   depends_on "go" => :build
