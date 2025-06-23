@@ -5,6 +5,7 @@ class MMicro < Formula
       tag:      "v2.0.14",
       revision: "04c577049ca898f097cd6a2dae69af0b4d4493e1"
   license "MIT"
+  revision 1
   head "https://github.com/zyedidia/micro.git", branch: "master"
 
   bottle do
@@ -20,13 +21,13 @@ class MMicro < Formula
   conflicts_with "micro", because: "micro install a conflicting micro binary"
 
   resource "micro-syntax" do
-    url "https://github.com/commitmaniac/micro-syntax/archive/refs/tags/1.0.0.tar.gz"
-    sha256 "d5a896005bbda14fbd10f1815cebdbad68d0041e1e02f703fa4e4823078751f2"
+    url "https://github.com/commitmaniac/micro-syntax/archive/refs/tags/1.1.0.tar.gz"
+    sha256 "d5ea23be8cb022f3776f1d21c3838a1f450421a8b55bac1de8b397bbf81db40a"
   end
 
   patch do
-    url "https://gist.github.com/commitmaniac/ce1bfd39705ed265181db82b8bdf76ec/raw/support-ublock-in-comment-plugin.patch"
-    sha256 "38c46923288d1edf5f893429c0841e3e71e009cfda79e0cf80a7ab3b6dd9f3d5"
+    url "https://gist.github.com/commitmaniac/ce1bfd39705ed265181db82b8bdf76ec/raw/adblock-list-support-comments.patch"
+    sha256 "975327728c7bd8f9cfcb37fbdb085113dc845c4f354a8ab3642c7280b4320626"
   end
 
   def install
