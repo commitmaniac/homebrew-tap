@@ -19,7 +19,7 @@ env:
 jobs:
   checks:
     name: Checks
-    runs-on: ubuntu-24.04
+    runs-on: macos-15
     steps:
       - name: Setup Homebrew
         id: homebrew
