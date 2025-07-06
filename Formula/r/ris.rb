@@ -21,6 +21,11 @@ class Ris < Formula
   end
 
   test do
+    touch ["hello.txt", "test.txt", "sim.txt"]
+    system bin/"ris", "-select", "*.txt", "-offset", "10", "-keep-name", "."
+    assert_path_exists testpath/"0010_hello.txt"
+    assert_path_exists testpath/"0020_sim.txt"
+    assert_path_exists testpath/"0030_test.txt"
     assert_match version.to_s, shell_output(bin/"ris -version")
   end
 end
