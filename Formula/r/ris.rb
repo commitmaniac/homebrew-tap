@@ -26,6 +26,6 @@ class Ris < Formula
     assert_path_exists testpath/"0010_hello.txt"
     assert_path_exists testpath/"0020_sim.txt"
     assert_path_exists testpath/"0030_test.txt"
-    assert_match version.to_s, shell_output(bin/"ris -version")
+    assert_match version.to_s, shell_output("#{bin}/ris -version")
   end
 end
