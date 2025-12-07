@@ -8,10 +8,10 @@ class Tdp < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/commitmaniac/tap"
-    sha256 cellar: :any,                 arm64_sequoia: "5af7905180a82a3bc52ee95c362154106b054ddd52c98ecdbb3ec520ccd41b7c"
-    sha256 cellar: :any,                 arm64_sonoma:  "3df5304379bfaf6870145e720cbc9478f4286c5af6ae5b4f2f50c3e3fd69063c"
-    sha256 cellar: :any,                 ventura:       "86cc52a511d8ed948137cb508c2d8170f764772828dca94a94cac0d4228459d9"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "95df1f8c7c50ef2be185afd8d51a72e46a301b0cc73fd0a12bad051fa19a8c11"
+    sha256 cellar: :any,                 arm64_tahoe:   "419ab323d9177d4b8a733594ebb5a9224247feb4d73f0d2e9cdaae08a76afa89"
+    sha256 cellar: :any,                 arm64_sequoia: "2c84f5cdc71b325f0b6829db251cd34fdff6f72f2efa738d7f23702c08e39612"
+    sha256 cellar: :any,                 arm64_sonoma:  "ca7f33ddc483cfa4a3483bd19ba7a6930469d7b67bdec2eaf9cafdbf5881303a"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "42ae9fcbc3654f43a2d7249c417aef3560510b64b52894c443136a69d76e0f21"
   end
 
   depends_on "pkgconf" => :build
