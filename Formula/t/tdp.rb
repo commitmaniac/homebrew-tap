@@ -1,8 +1,8 @@
 class Tdp < Formula
   desc "Parse your downloaded TikTok data"
   homepage "https://github.com/commitmaniac/tdp"
-  url "https://github.com/commitmaniac/tdp/archive/refs/tags/1.0.2.tar.gz"
-  sha256 "4d84a8ed149504fdaf2dffd4c84c40b76980700094ba07ca88b95f17f4d47ee4"
+  url "https://github.com/commitmaniac/tdp/archive/refs/tags/1.1.0.tar.gz"
+  sha256 "e88e0d6b8990294b921a4d3260e292d1c5e46a6f16e92a798789e1640db9173c"
   license "BSD-3-Clause"
   head "https://github.com/commitmaniac/tdp.git", branch: "master"
 
@@ -23,7 +23,7 @@ class Tdp < Formula
   end
 
   test do
-    err_msg = "Error: no input file provided"
-    assert_match err_msg, shell_output(bin/"tdp -liked 2>&1", 1)
+    err_msg = "Error: no data file provided"
+    assert_match err_msg, shell_output("#{bin}/tdp -liked 2>&1", 1)
   end
 end
