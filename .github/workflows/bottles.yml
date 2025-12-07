@@ -21,9 +21,9 @@ jobs:
     strategy:
       matrix:
         runner:
-          - macos-13
           - macos-14
           - macos-15
+          - macos-26
           - ubuntu-24.04
     runs-on: ${{ matrix.runner }}
     steps:
@@ -61,7 +61,7 @@ jobs:
   publish:
     name: Publish
     needs: build
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     permissions:
       actions: read
       contents: write
@@ -91,7 +91,7 @@ jobs:
           merge-multiple: true
 
       - name: Generate build provenance
-        uses: actions/attest-build-provenance@v2
+        uses: actions/attest-build-provenance@v3
         with:
           subject-path: "${{ github.workspace }}/bottles/*.tar.gz"
 
